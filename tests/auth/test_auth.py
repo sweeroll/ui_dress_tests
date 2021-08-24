@@ -8,4 +8,4 @@ class TestAuth:
         """
         app.open_main_page()
         app.login.auth(login="test4738@test.com", password="Password11")
-        assert 1 == 1, "Check auth data"
+        assert app.login.is_auth, "You are not authorized, check auth data"

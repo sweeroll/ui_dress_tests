@@ -6,4 +6,4 @@ class LoginPageLocators:
     EMAIL = (By.ID, "email")
     PASSWORD = (By.ID, "passwd")
     LOGIN_SUBMIT = (By.ID, "SubmitLogin")
-    ACCOUNT_NAME = (By.CLASS_NAME, "account")
+    HEADER_USER_INFO = (By.CLASS_NAME, "header_user_info")
