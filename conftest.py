@@ -11,7 +11,6 @@ from pages.application import Application
 def app(request):
     base_url = request.config.getoption("--base-url")
     fixture = Application(webdriver.Chrome(ChromeDriverManager().install()), base_url)
-    fixture.driver.implicitly_wait(10)
     yield fixture
     fixture.quit()
 
