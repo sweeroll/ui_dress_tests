@@ -1,4 +1,7 @@
+import pytest
+
 from common.constants import LoginConstants
+from models.auth import AuthData
 
 
 class TestAuth:
@@ -10,7 +13,8 @@ class TestAuth:
         3. Check auth result
         """
         app.open_auth_page()
-        app.login.auth("admin", "Vjcrdf2!")
+        data = AuthData(login="admin", password="Vjcrdf2!")
+        app.login.auth(data)
         assert app.login.is_auth(), "We are not auth"
 
     def test_auth_invalid_data(self, app):
@@ -21,27 +25,20 @@ class TestAuth:
         3. Check auth result
         """
         app.open_auth_page()
-        app.login.auth("admin", "admin1")
+        data = AuthData.random()
+        app.login.auth(data)
         assert LoginConstants.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
 
-    def test_auth_empty_password(self, app):
+    @pytest.mark.parametrize("field", ["login", "password"])
+    def test_auth_empty_data(self, app, field):
         """
         Steps
         1. Open main page
-        2. Auth with empty password
+        2. Auth with empty data
         3. Check auth result
         """
         app.open_auth_page()
-        app.login.auth("admin", "")
-        assert LoginConstants.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
-
-    def test_auth_empty_login(self, app):
-        """
-        Steps
-        1. Open main page
-        2. Auth with empty login
-        3. Check auth result
-        """
-        app.open_auth_page()
-        app.login.auth("", "Vjcrdf2!")
+        data = AuthData.random()
+        setattr(data, field, None)
+        app.login.auth(data)
         assert LoginConstants.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"

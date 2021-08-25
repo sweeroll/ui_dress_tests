@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webelement import WebElement
 
+from models.auth import AuthData
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
 
@@ -27,12 +28,12 @@ class LoginPage(BasePage):
     def exit(self) -> WebElement:
         return self.find_element(LoginPageLocators.EXIT)
 
-    def auth(self, login: str, password: str):
+    def auth(self, data: AuthData):
         if self.is_auth():
             self.click_element(self.user_menu())
             self.click_element(self.exit())
-        self.fill_element(self.email_input(), login)
-        self.fill_element(self.password_input(), password)
+        self.fill_element(self.email_input(), data.login)
+        self.fill_element(self.password_input(), data.password)
         self.click_element(self.submit_button())
 
     def auth_login_error(self) -> str:
