@@ -19,7 +19,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--base-url",
         action="store",
-        default="http://automationpractice.com/",
+        default="https://qacoursemoodle.innopolis.university",
         help="enter base_url",
     ),
     parser.addoption(
