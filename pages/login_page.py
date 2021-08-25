@@ -34,3 +34,6 @@ class LoginPage(BasePage):
         self.fill_element(self.email_input(), login)
         self.fill_element(self.password_input(), password)
         self.click_element(self.submit_button())
+
+    def auth_login_error(self) -> str:
+        return self.find_element(LoginPageLocators.LOGIN_ERROR).text
