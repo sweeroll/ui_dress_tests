@@ -13,7 +13,7 @@ class TestAuth:
         3. Check auth result
         """
         app.open_auth_page()
-        data = AuthData(login="admin", password="Vjcrdf2!")
+        data = AuthData(login="rishat", password="Rishat-9173")
         app.login.auth(data)
         assert app.login.is_auth(), "We are not auth"
 
