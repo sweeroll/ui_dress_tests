@@ -7,5 +7,5 @@ class TestAuth:
         3. Check auth result
         """
         app.open_auth_page()
-        app.login.auth("admin", "Vjcrdf2!")
+        app.login.auth("rishat", "Rishat-9173")
         assert app.login.is_auth(), "We are not auth"

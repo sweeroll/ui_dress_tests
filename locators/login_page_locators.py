@@ -9,3 +9,5 @@ class LoginPageLocators:
     USER_BUTTON = (By.CLASS_NAME, "userbutton")
     USER_MENU = (By.CLASS_NAME, "usermenu")
     EXIT = (By.ID, "actionmenuaction-6")
+    LOGIN_ERROR = (By.ID, "loginerrormessage")
+    USER_MENU_SETTINGS = (By.ID, "actionmenuaction-5")

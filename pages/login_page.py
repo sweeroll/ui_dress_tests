@@ -2,6 +2,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
+from locators.personal_data_page_locators import PersonalDataPageLocators
 
 
 class LoginPage(BasePage):
@@ -34,3 +35,11 @@ class LoginPage(BasePage):
         self.fill_element(self.email_input(), login)
         self.fill_element(self.password_input(), password)
         self.click_element(self.submit_button())
+
+    def user_menu_settings(self) -> WebElement:
+        return self.find_element(LoginPageLocators.USER_MENU_SETTINGS)
+
+    def go_to_editing_personal_data(self):
+        self.click_element(self.user_menu())
+        self.click_element(self.user_menu_settings())
+        self.click_element(self.find_element(PersonalDataPageLocators.EDIT_INFO))
