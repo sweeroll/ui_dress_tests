@@ -1,5 +1,7 @@
 import pytest
 
+from models.auth import AuthData
+
 
 class TestPersonalData:
     def test_valid_edit_basic_personal_data(self, app):
@@ -15,7 +17,8 @@ class TestPersonalData:
         app.open_main_page()
         if not app.login.is_auth():
             app.open_auth_page()
-            app.login.auth("rishat", "Rishat-9173")
+            data = AuthData(login="rishat", password="Rishat-9173")
+            app.login.auth(data)
             assert app.login.is_auth(), "You are not auth"
         app.login.go_to_editing_personal_data()
         app.personal_data.edit_personal_data()
@@ -45,7 +48,8 @@ class TestPersonalData:
         app.open_main_page()
         if not app.login.is_auth():
             app.open_auth_page()
-            app.login.auth("rishat", "Rishat-9173")
+            data = AuthData(login="rishat", password="Rishat-9173")
+            app.login.auth(data)
             assert app.login.is_auth(), "You are not auth"
         app.login.go_to_editing_personal_data()
         app.personal_data.edit_personal_data(**data)
