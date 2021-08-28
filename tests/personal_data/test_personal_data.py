@@ -100,6 +100,7 @@ class TestPersonalData:
             [PD().random().image_url, PD().random().image_url],
         ],
     )
+    @pytest.mark.xfail
     @pytest.mark.bug
     def test_edit_incorrect_name_lastname(self, app, name, last_name):
         """
