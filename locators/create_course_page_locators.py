@@ -17,3 +17,4 @@ class CoursePageLocators:
     TEACHER_NAME = (By.ID, "id_role_3")
     STUDENT_NAME = (By.ID, "id_role_5")
     SAVE_AND_SHOW_BUTTON = (By.ID, "id_saveanddisplay")
+    GENERAL_DATA = (By.ID, "id_general")

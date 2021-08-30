@@ -44,17 +44,19 @@ class CreateCourse:
     def random():
         full_course_name = fake.job()
         short_course_name = fake.word()
-        end_month = random.choice(CreateCourseConstants.MONTHS)
-        end_day = random.randint(1, CreateCourseConstants.COURSE_DAY)
-        end_year = random.randint(
-            CreateCourseConstants.CURRENT_YEAR, CreateCourseConstants.LAST_YEAR
+        end_month = str(random.choice(CreateCourseConstants.MONTHS))
+        end_day = str(random.randint(1, CreateCourseConstants.COURSE_DAY))
+        end_year = str(
+            random.randint(
+                CreateCourseConstants.CURRENT_YEAR, CreateCourseConstants.LAST_YEAR
+            )
         )
-        end_hour = random.randint(0, 23)
+        end_hour = str(random.randint(0, 23))
         end_minute = random.randint(0, 59)
         course_description = fake.text(max_nb_chars=200)
-        section_number = random.randint(0, CreateCourseConstants.SECTION_NUMBER)
+        section_number = str(random.randint(0, CreateCourseConstants.SECTION_NUMBER))
         course_language = CreateCourseConstants.COURSE_LANGUAGE
-        max_file_size = random.choice(CreateCourseConstants.FILE_SIZES)
+        max_file_size = str(random.choice(CreateCourseConstants.FILE_SIZES_VALUES))
         manager_name = fake.word()
         teacher_name = fake.word()
         student_name = fake.word()

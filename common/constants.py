@@ -10,22 +10,17 @@ class AccountConstants:
 
 class CreateCourseConstants:
     SECTION_NUMBER = 52
-    COURSE_LANGUAGE = "Русский"
+    COURSE_LANGUAGE = "ru"
     CURRENT_YEAR = 2021
     LAST_YEAR = 2050
-    COURSE_DAY = 29
-    FILE_SIZES = [1, 2, 5]
-    MONTHS = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+    COURSE_DAY = 31
+    FILE_SIZES_VALUES = [
+        0,
+        2097152,
+        1048576,
+        512000,
+        102400,
+        51200,
+        10240,
     ]
+    MONTHS = 12
