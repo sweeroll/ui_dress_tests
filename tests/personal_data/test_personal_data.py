@@ -52,26 +52,15 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
-    @pytest.mark.parametrize(
-        "name, last_name, email",
-        [
-            ["", "", ""],
-            ["", PD().random().last_name, PD().random().email],
-            [PD().random().name, "", PD().random().email],
-            [PD().random().name, PD().random().last_name, ""],
-            [PD().random().name, PD().random().last_name, "nilluziafmail.ru"],
-            [PD().random().name, PD().random().last_name, "@mail.ru"],
-            [PD().random().name, PD().random().last_name, "111"],
-        ],
-    )
-    def test_invalid_edit_basic_personal_data(self, app, name, last_name, email):
+    @pytest.mark.parametrize("email", ["nilluziafmail.ru", "@mail.ru", "111"])
+    def test_edit_basic_personal_data_with_incorrect_email(self, app, email):
         """
         Steps
         1. Open auth page
         2. Auth with valid data
         3. Check auth result
         4. Go to page with editing personal data
-        5. Edit basic personal data with invalid data
+        5. Edit basic personal data with incorrect email
         6. Check editing is not successfully
         """
         app.open_main_page()
@@ -82,8 +71,6 @@ class TestPersonalData:
             assert app.login.is_auth(), "You are not auth"
         app.login.go_to_editing_personal_data()
         personal_data = PD.random()
-        setattr(personal_data, "name", name)
-        setattr(personal_data, "last_name", last_name)
         setattr(personal_data, "email", email)
         app.personal_data.edit_personal_data(personal_data)
         assert (
