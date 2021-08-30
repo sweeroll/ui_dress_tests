@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class CoursePageLocators:
+class CreateCoursePageLocators:
     FULL_COURSE_NAME = (By.ID, "id_fullname")
     SHORT_COURSE_NAME = (By.ID, "id_shortname")
     END_DAY = (By.ID, "id_enddate_day")
@@ -18,3 +18,9 @@ class CoursePageLocators:
     STUDENT_NAME = (By.ID, "id_role_5")
     SAVE_AND_SHOW_BUTTON = (By.ID, "id_saveanddisplay")
     GENERAL_DATA = (By.ID, "id_general")
+    NEW_COURSE_HEADER = (By.CLASS_NAME, "page-header-headings")
+    CREATE_COURSE_HEADER = (By.TAG_NAME, "h2")
+    COURSE_FORMAT_DATA = (By.XPATH, "//a[text()='Формат курса']")
+    APPEARANCE_DATA = (By.XPATH, "//a[text()='Внешний вид']")
+    FILE_DATA = (By.XPATH, "//a[text()='Файлы и загрузки']")
+    ROLE_RENAME_DATA = (By.XPATH, "//a[text()='Переименование ролей']")

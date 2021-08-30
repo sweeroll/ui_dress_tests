@@ -13,7 +13,6 @@ class CreateCourseConstants:
     COURSE_LANGUAGE = "ru"
     CURRENT_YEAR = 2021
     LAST_YEAR = 2050
-    COURSE_DAY = 31
     FILE_SIZES_VALUES = [
         0,
         2097152,
@@ -23,4 +22,3 @@ class CreateCourseConstants:
         51200,
         10240,
     ]
-    MONTHS = 12
