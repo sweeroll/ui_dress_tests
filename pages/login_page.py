@@ -44,5 +44,14 @@ class LoginPage(BasePage):
         self.click_element(self.user_menu())
         self.click_element(self.user_menu_settings())
         self.click_element(self.find_element(PersonalDataPageLocators.EDIT_INFO))
+
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
+
+    def sign_up_button(self) -> WebElement:
+        return self.find_element(LoginPageLocators.SIGN_UP)
+
+    def go_to_sign_up_page(self):
+
+        self.click_element(self.sign_up_button())
+

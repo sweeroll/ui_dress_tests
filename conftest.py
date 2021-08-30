@@ -11,11 +11,11 @@ from pages.application import Application
 @pytest.fixture(scope="session")
 def app(request):
     base_url = request.config.getoption("--base-url")
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
     fixture = Application(
         webdriver.Chrome(
-            ChromeDriverManager().install(), chrome_options=chrome_options
+            ChromeDriverManager().install()
         ),
         base_url,
     )
