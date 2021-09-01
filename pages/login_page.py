@@ -1,3 +1,5 @@
+import logging
+
 from selenium.webdriver.remote.webelement import WebElement
 
 from locators.base_page_locators import BasePageLocators
@@ -5,6 +7,8 @@ from models.auth import AuthData
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators
 from locators.personal_data_page_locators import PersonalDataPageLocators
+
+logger = logging.getLogger("moodle")
 
 
 class LoginPage(BasePage):
@@ -41,6 +45,7 @@ class LoginPage(BasePage):
         return self.find_element(BasePageLocators.CONFIRM_EXIT_BUTTON)
 
     def auth(self, data: AuthData):
+        logger.info(f'User email is "{data.login}, user password {data.password}"')
         if self.is_auth():
             self.click_element(self.user_menu())
             self.click_element(self.exit())

@@ -1,3 +1,5 @@
+import logging
+
 import pytest
 
 from selenium import webdriver
@@ -8,9 +10,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pages.application import Application
 
 
+logger = logging.getLogger("moodle")
+
+
 @pytest.fixture(scope="session")
 def app(request):
     base_url = request.config.getoption("--base-url")
+    logger.info(f"Start moodle {base_url}")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     fixture = Application(
