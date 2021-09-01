@@ -8,7 +8,7 @@ class TestSignUp:
     def test_valid_sign_up_data(self, app):
         """
         Steps
-        1. Open page https://qacoursemoodle.innopolis.university/login/index.php
+        1. Open Login page
         2. Click the "Создать учетную запись" button
         3. Fill in the required fields: Login, Password, Email (with mask test@test.te), Email Again,
         First_name, Second_name
