@@ -52,6 +52,5 @@ class LoginPage(BasePage):
         return self.find_element(LoginPageLocators.SIGN_UP)
 
     def go_to_sign_up_page(self):
-
         self.click_element(self.sign_up_button())
 

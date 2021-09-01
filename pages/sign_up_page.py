@@ -6,9 +6,6 @@ from pages.base_page import BasePage
 
 
 class SignUp(BasePage):
-    def signup_button(self) -> WebElement:
-        return self.find_element(LoginPageLocators.SIGN_UP)
-
     def login_id_input(self) -> WebElement:
         return self.find_element(SignUpLocators.LOGIN_ID)
 
@@ -58,7 +55,7 @@ class SignUp(BasePage):
             return True
         return False
 
-    def click_continue (self):
+    def click_continue(self):
         return self.click_element(self.continue_button())
 
     def click_log_in(self):
