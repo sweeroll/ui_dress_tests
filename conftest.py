@@ -11,15 +11,20 @@ from pages.application import Application
 def app(request):
     base_url = request.config.getoption("--base-url")
     headless_mode = request.config.getoption("--headless").lower()
-    chrome_options = Options()
     if headless_mode == "true":
+        chrome_options = Options()
         chrome_options.headless = True
-    elif headless_mode != "false":
+        fixture = Application(
+            webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
+            base_url,
+        )
+    elif headless_mode == "false":
+        fixture = Application(
+            webdriver.Chrome(ChromeDriverManager().install()),
+            base_url,
+        )
+    else:
         raise pytest.UsageError("--headless should be true or false")
-    fixture = Application(
-        webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
-        base_url,
-    )
     yield fixture
     fixture.quit()
 
