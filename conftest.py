@@ -20,9 +20,7 @@ def app(request):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     fixture = Application(
-        webdriver.Chrome(
-            ChromeDriverManager().install(), chrome_options=chrome_options
-        ),
+        webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
         base_url,
     )
     yield fixture
@@ -43,5 +41,8 @@ def pytest_addoption(parser):
         help="enter username",
     ),
     parser.addoption(
-        "--password", action="store", default="Password11", help="enter password",
+        "--password",
+        action="store",
+        default="Password11",
+        help="enter password",
     ),

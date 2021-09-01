@@ -65,3 +65,10 @@ class LoginPage(BasePage):
 
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
+
+    def sign_up_button(self) -> WebElement:
+        return self.find_element(LoginPageLocators.SIGN_UP_BUTTON)
+
+    def go_to_sign_up_page(self):
+        self.click_element(self.sign_up_button())
+
