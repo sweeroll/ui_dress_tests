@@ -13,7 +13,7 @@ def app(request):
     headless_mode = request.config.getoption("--headless").lower()
     chrome_options = Options()
     if headless_mode == "true":
-        chrome_options.add_argument("--headless")
+        chrome_options.headless = True
     elif headless_mode != "false":
         raise pytest.UsageError("--headless should be true or false")
     fixture = Application(
