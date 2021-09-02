@@ -1,3 +1,5 @@
+import logging
+
 import pytest
 
 from selenium import webdriver
@@ -8,10 +10,14 @@ from pages.application import Application
 from models.auth import AuthData
 
 
+logger = logging.getLogger("moodle")
+
+
 @pytest.fixture(scope="session")
 def app(request):
     base_url = request.config.getoption("--base-url")
     headless_mode = request.config.getoption("--headless").lower()
+    logger.info(f"Start moodle {base_url} with headless={headless_mode} mode")
     if headless_mode == "true":
         chrome_options = Options()
         chrome_options.headless = True
