@@ -77,27 +77,16 @@ class PersonalDataPage(BasePage):
     def submit_changes(self):
         self.click_element(self.submit_button())
 
-    def edit_personal_data(
-        self,
-        name="Ришат",
-        lastname="Файзуллин",
-        email="nilluziaf@gmail.com",
-        email_display_value="1",
-        timezone="Europe/Moscow",
-        moodle_net_profile="www.google.com",
-        city="Казань",
-        country="RU",
-        text="Обо мне",
-    ):
-        self.input_name(name)
-        self.input_lastname(lastname)
-        self.input_email(email)
-        self.select_email_display(email_display_value)
-        self.input_moodle_net_profile(moodle_net_profile)
-        self.input_city(city)
-        self.select_country(country)
-        self.select_timezone(timezone)
-        self.input_about(text)
+    def edit_personal_data(self, data):
+        self.input_name(data.name)
+        self.input_lastname(data.last_name)
+        self.input_email(data.email)
+        self.select_email_display(data.email_display_mode)
+        self.input_moodle_net_profile(data.moodle_net_profile)
+        self.input_city(data.city)
+        self.select_country(data.country_code)
+        self.select_timezone(data.timezone)
+        self.input_about(data.about)
         self.submit_changes()
 
     def is_changed(self, wait_time=10):
