@@ -40,7 +40,9 @@ class PersonalData:
         name = fake.first_name()
         last_name = fake.last_name()
         email = fake.email()
-        email_display_mode = random.choice(PersonalDataConstants.EMAIL_DISPLAY_MODES)
+        email_display_mode = random.choice(
+            list(PersonalDataConstants.EMAIL_DISPLAY_MODES.values())
+        )
         moodle_net_profile = fake.url()
         city = fake.city_name()
         timezone = random.choice(PersonalDataConstants.TIMEZONE_VALUES)

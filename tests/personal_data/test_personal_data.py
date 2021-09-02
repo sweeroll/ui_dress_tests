@@ -2,13 +2,12 @@ import pytest
 import allure
 from allure_commons.types import AttachmentType
 
-from models.auth import AuthData
 from models.personal_data import PersonalData as PD
 
 
 @pytest.mark.personal_data
 class TestPersonalData:
-    def test_valid_edit_basic_personal_data(self, app):
+    def test_valid_edit_basic_personal_data(self, app, auth):
         """
         Steps
         1. Open auth page
@@ -18,29 +17,18 @@ class TestPersonalData:
         5. Edit basic personal data with valid data
         6. Check successfully editing
         """
-        with allure.step("Auth to account"):
-            app.open_main_page()
-            if not app.login.is_auth():
-                app.open_auth_page()
-                auth_data = AuthData(login="rishat", password="Rishat-9173")
-                app.login.auth(auth_data)
-                assert app.login.is_auth(), "You are not auth"
-        with allure.step("Go to personal data editing page"):
-            app.login.go_to_editing_personal_data()
-        with allure.step("Change personal data"):
-            personal_data = PD.random()
-            app.personal_data.edit_personal_data(personal_data)
-        with allure.step("Screenshot"):
-            allure.attach(
-                app.personal_data.make_screenshot(),
-                name="Successful_changing_screenshot",
-                attachment_type=AttachmentType.PNG,
-            )
-        with allure.step("Check if personal data changed"):
-            assert app.personal_data.is_changed(), "Personal data not changed!"
+        app.login.go_to_editing_personal_data()
+        personal_data = PD.random()
+        app.personal_data.edit_personal_data(personal_data)
+        allure.attach(
+            app.personal_data.make_screenshot(),
+            name="Successful_changing_screenshot",
+            attachment_type=AttachmentType.PNG,
+        )
+        assert app.personal_data.is_changed(), "Personal data not changed!"
 
     @pytest.mark.parametrize("field", ["name", "last_name", "email"])
-    def test_edit_basic_personal_data_without_required_field(self, app, field):
+    def test_edit_basic_personal_data_without_required_field(self, app, auth, field):
         """
         Steps
         1. Open auth page
@@ -50,32 +38,21 @@ class TestPersonalData:
         5. Edit basic personal data with invalid data
         6. Check editing is not successfully
         """
-        with allure.step("Auth to account"):
-            app.open_main_page()
-            if not app.login.is_auth():
-                app.open_auth_page()
-                auth_data = AuthData(login="rishat", password="Rishat-9173")
-                app.login.auth(auth_data)
-                assert app.login.is_auth(), "You are not auth"
-        with allure.step("Go to personal data editing page"):
-            app.login.go_to_editing_personal_data()
-        with allure.step("Try to change personal data without required fields"):
-            personal_data = PD.random()
-            setattr(personal_data, field, "")
-            app.personal_data.edit_personal_data(personal_data)
-        with allure.step("Screenshot"):
-            allure.attach(
-                app.personal_data.make_screenshot(),
-                name="Unsuccessful_changing_screenshot",
-                attachment_type=AttachmentType.PNG,
-            )
-        with allure.step("Check personal data not changed"):
-            assert (
-                not app.personal_data.is_changed()
-            ), "Personal data should not be changed!"
+        app.login.go_to_editing_personal_data()
+        personal_data = PD.random()
+        setattr(personal_data, field, "")
+        app.personal_data.edit_personal_data(personal_data)
+        allure.attach(
+            app.personal_data.make_screenshot(),
+            name="Unsuccessful_changing_screenshot",
+            attachment_type=AttachmentType.PNG,
+        )
+        assert (
+            not app.personal_data.is_changed()
+        ), "Personal data should not be changed!"
 
     @pytest.mark.parametrize("email", ["nilluziafmail.ru", "@mail.ru", "111"])
-    def test_edit_basic_personal_data_with_incorrect_email(self, app, email):
+    def test_edit_basic_personal_data_with_incorrect_email(self, app, auth, email):
         """
         Steps
         1. Open auth page
@@ -85,29 +62,18 @@ class TestPersonalData:
         5. Edit basic personal data with incorrect email
         6. Check editing is not successfully
         """
-        with allure.step("Auth to account"):
-            app.open_main_page()
-            if not app.login.is_auth():
-                app.open_auth_page()
-                auth_data = AuthData(login="rishat", password="Rishat-9173")
-                app.login.auth(auth_data)
-                assert app.login.is_auth(), "You are not auth"
-        with allure.step("Go to personal data editing page"):
-            app.login.go_to_editing_personal_data()
-        with allure.step("Try to change personal data with incorrect email"):
-            personal_data = PD.random()
-            setattr(personal_data, "email", email)
-            app.personal_data.edit_personal_data(personal_data)
-        with allure.step("Screenshot"):
-            allure.attach(
-                app.personal_data.make_screenshot(),
-                name="Unsuccessful_changing_screenshot",
-                attachment_type=AttachmentType.PNG,
-            )
-        with allure.step("Check personal data not changed"):
-            assert (
-                not app.personal_data.is_changed()
-            ), "Personal data should not be changed!"
+        app.login.go_to_editing_personal_data()
+        personal_data = PD.random()
+        setattr(personal_data, "email", email)
+        app.personal_data.edit_personal_data(personal_data)
+        allure.attach(
+            app.personal_data.make_screenshot(),
+            name="Unsuccessful_changing_screenshot",
+            attachment_type=AttachmentType.PNG,
+        )
+        assert (
+            not app.personal_data.is_changed()
+        ), "Personal data should not be changed!"
 
     @pytest.mark.parametrize(
         "name, last_name",
@@ -121,7 +87,7 @@ class TestPersonalData:
     )
     @pytest.mark.xfail
     @pytest.mark.bug
-    def test_edit_incorrect_name_lastname(self, app, name, last_name):
+    def test_edit_incorrect_name_lastname(self, app, auth, name, last_name):
         """
         Steps
         1. Open auth page
@@ -131,29 +97,16 @@ class TestPersonalData:
         5. Edit name or(and) lastname as digits
         6. Check editing is not successfully
         """
-        with allure.step("Auth to account"):
-            app.open_main_page()
-            if not app.login.is_auth():
-                app.open_auth_page()
-                auth_data = AuthData(login="rishat", password="Rishat-9173")
-                app.login.auth(auth_data)
-                assert app.login.is_auth(), "You are not auth"
-        with allure.step("Go to personal data editing page"):
-            app.login.go_to_editing_personal_data()
-        with allure.step(
-            "Try to change personal data with incorrect name and lastname"
-        ):
-            personal_data = PD.random()
-            setattr(personal_data, "name", name)
-            setattr(personal_data, "last_name", last_name)
-            app.personal_data.edit_personal_data(personal_data)
-        with allure.step("Screenshot"):
-            allure.attach(
-                app.personal_data.make_screenshot(),
-                name="Unsuccessful_changing_screenshot",
-                attachment_type=AttachmentType.PNG,
-            )
-        with allure.step("Check personal data not changed"):
-            assert (
-                not app.personal_data.is_changed()
-            ), "Personal data should not be changed!"
+        app.login.go_to_editing_personal_data()
+        personal_data = PD.random()
+        setattr(personal_data, "name", name)
+        setattr(personal_data, "last_name", last_name)
+        app.personal_data.edit_personal_data(personal_data)
+        allure.attach(
+            app.personal_data.make_screenshot(),
+            name="Unsuccessful_changing_screenshot",
+            attachment_type=AttachmentType.PNG,
+        )
+        assert (
+            not app.personal_data.is_changed()
+        ), "Personal data should not be changed!"
