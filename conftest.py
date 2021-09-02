@@ -44,6 +44,8 @@ def auth(app, request):
     auth_data = AuthData(login=username, password=password)
     app.login.auth(auth_data)
     assert app.login.is_auth(), "You are not auth"
+    yield
+    app.login.sign_out()
 
 
 def pytest_addoption(parser):
