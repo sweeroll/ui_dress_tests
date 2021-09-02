@@ -1,5 +1,6 @@
 from pages.login_page import LoginPage
 from pages.personal_data_page import PersonalDataPage
+from pages.sign_up_page import SignUp
 
 
 class Application:
@@ -8,6 +9,7 @@ class Application:
         self.url = url
         self.login = LoginPage(self)
         self.personal_data = PersonalDataPage(self)
+        self.sign_up = SignUp(self)
 
     def open_main_page(self):
         self.driver.get(self.url)
