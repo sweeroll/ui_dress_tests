@@ -15,6 +15,7 @@ class LoginPage(BasePage):
     def is_auth(self):
         self.find_element(LoginPageLocators.FORM)
         element = self.find_elements(LoginPageLocators.USER_BUTTON)
+        print(element)
         if len(element) > 0:
             return True
         return False
