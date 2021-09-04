@@ -1,4 +1,3 @@
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -36,8 +35,13 @@ class BasePage:
         element.clear()
         if text:
             element.send_keys(text)
-            element.send_keys(Keys.RETURN)
             return element
+
+    def fill_file_input(self, file_input, file):
+        file_input.clear()
+        if file:
+            file_input.send_keys(file)
+            return file_input
 
     def click_element(self, element):
         element.click()

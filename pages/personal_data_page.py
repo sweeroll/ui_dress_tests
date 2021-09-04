@@ -1,5 +1,3 @@
-from time import sleep
-
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -45,12 +43,6 @@ class PersonalDataPage(BasePage):
 
     def about_input(self) -> WebElement:
         return self.find_element(PersonalDataPageLocators.ABOUT)
-
-    def user_image_input(self) -> WebElement:
-        return self.find_element(PersonalDataPageLocators.USER_IMAGE_INPUT)
-
-    def input_user_image(self, image_file):
-        self.fill_element(self.user_image_input(), image_file)
 
     def user_image_file_add_button(self) -> WebElement:
         return self.find_clickable_element(
@@ -125,20 +117,6 @@ class PersonalDataPage(BasePage):
         self.input_about(data.about)
         self.submit_changes()
 
-    def set_user_image(self, image_file, user_image_description):
-        sleep(5)
-        self.execute_js("document.querySelector('input#id_imagefile').type='';")
-        sleep(5)
-        self.input_user_image(image_file)
-        sleep(5)
-        self.input_user_image_description(user_image_description)
-        sleep(5)
-        self.submit_changes()
-        sleep(5)
-        # self.choose_user_image_file(image_file)
-        # self.input_user_image_description(user_image_description)
-        # self.submit_changes()
-
     def is_changed(self, wait_time=10):
         header_user_info_elements = WebDriverWait(self.app.driver, wait_time).until(
             EC.presence_of_all_elements_located(PersonalDataPageLocators.NAVBAR_ITEMS),
@@ -149,6 +127,11 @@ class PersonalDataPage(BasePage):
             return True
         else:
             return False
+
+    def set_user_image(self, image_file, user_image_description):
+        self.choose_user_image_file(image_file)
+        self.input_user_image_description(user_image_description)
+        self.submit_changes()
 
     def is_user_image_changed(self):
         if self.is_changed() and not self.find_elements(
