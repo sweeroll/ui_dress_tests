@@ -9,7 +9,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pages.application import Application
 from models.auth import AuthData
 
-
 logger = logging.getLogger("moodle")
 
 
@@ -54,7 +53,7 @@ def pytest_addoption(parser):
         action="store",
         default="true",
         help="enter 'true' if you want run tests in headless mode of browser,\n"
-        "enter 'false' - if not",
+             "enter 'false' - if not",
     ),
     parser.addoption(
         "--base-url",
