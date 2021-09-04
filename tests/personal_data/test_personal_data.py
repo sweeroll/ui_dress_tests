@@ -1,8 +1,14 @@
+import os.path
+
 import pytest
 import allure
 from allure_commons.types import AttachmentType
 
 from models.personal_data import PersonalData as PD
+
+
+current_dir = os.path.dirname(__file__)
+user_images_directory = os.path.join(current_dir, "user_images")
 
 
 @pytest.mark.personal_data
@@ -112,7 +118,14 @@ class TestPersonalData:
         ), "Personal data should not be changed!"
 
     @pytest.mark.set_user_image
-    def test_set_user_image(self, app, auth):
+    @pytest.mark.parametrize(
+        "image_file",
+        [
+            os.path.join(user_images_directory, image)
+            for image in os.listdir(user_images_directory)
+        ],
+    )
+    def test_set_user_image(self, app, auth, image_file):
         """
         Steps
         1. Open auth page
@@ -125,9 +138,7 @@ class TestPersonalData:
         app.login.go_to_editing_personal_data()
         personal_data = PD.random()
         app.personal_data.set_user_image(
-            r"C:\Users\Rishat\PycharmProjects\ui_dress_tests"
-            r"\tests\personal_data\user_image.png",
-            personal_data.user_image_description,
+            image_file, personal_data.user_image_description
         )
         allure.attach(
             app.personal_data.make_screenshot(),
