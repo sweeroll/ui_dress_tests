@@ -1,8 +1,5 @@
-from time import sleep
-
 import pytest
 
-from common.constants import SignUpConstants
 from models.auth import AuthData
 from models.sign_up import SignUpData
 
