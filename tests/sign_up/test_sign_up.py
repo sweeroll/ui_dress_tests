@@ -53,4 +53,4 @@ class TestSignUp:
         data = SignUpData().random()
         setattr(data, field, None)
         app.sign_up.sign_up(data)
-        assert app.sign_up.is_sign_upped(), "We are sign up with empty required fields!"
+        assert not app.sign_up.is_sign_upped(), "We are sign up with empty required fields!"
