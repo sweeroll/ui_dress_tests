@@ -29,7 +29,7 @@ class TestAuth:
         app.login.auth(data)
         assert LoginConstants.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
 
-    @pytest.mark.parametrize("field", ["login", "password"])
+    @pytest.mark.parametrize("field", [["login", "password"], "password", "email"])
     def test_auth_empty_data(self, app, field):
         """
         Steps
