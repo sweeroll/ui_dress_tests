@@ -18,7 +18,7 @@ def app(request):
     base_url = request.config.getoption("--base-url")
     headless_mode = request.config.getoption("--headless").lower()
     logger.info(f"Start moodle {base_url} with headless={headless_mode} mode")
-    if headless_mode == "false":
+    if headless_mode == "true":
         chrome_options = Options()
         chrome_options.headless = True
         fixture = Application(
