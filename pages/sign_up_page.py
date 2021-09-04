@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webelement import WebElement
 
+from common.constants import SignUpConstants
 from locators.login_page_locators import LoginPageLocators
 from locators.sign_up_page_locators import SignUpLocators
 from pages.base_page import BasePage
@@ -67,3 +68,9 @@ class SignUp(BasePage):
         if len(element) > 0:
             return True
         return False
+
+    def is_sign_upped(self) -> bool:
+        if self.get_page_url() == SignUpConstants.SIGN_UP_PAGE_URL:
+            return False
+        else:
+            return True

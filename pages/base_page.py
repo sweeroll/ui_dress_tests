@@ -51,3 +51,6 @@ class BasePage:
 
     def execute_js(self, js_script):
         self.app.driver.execute_script(js_script)
+
+    def get_page_url(self):
+        return self.app.driver.current_url
