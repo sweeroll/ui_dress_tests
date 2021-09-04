@@ -19,10 +19,10 @@ def app(request):
     headless_mode = request.config.getoption("--headless").lower()
     logger.info(f"Start moodle {base_url} with headless={headless_mode} mode")
     if headless_mode == "true":
-        # chrome_options = Options()
-        # chrome_options.headless = True
+        chrome_options = Options()
+        chrome_options.headless = True
         fixture = Application(
-            webdriver.Chrome(ChromeDriverManager().install()),
+            webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
             base_url,
         )
     elif headless_mode == "false":
