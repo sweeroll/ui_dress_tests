@@ -42,6 +42,7 @@ class TestSignUp:
         3. Fill in the required fields: Login, Password, Email (with mask test@test.te), Email Again,
         First_name, Second_name, Each field separately
         4. Click the "Создать мой новый аккаунт" button
+        5. Checking for registration of a new user without empty required fields
         """
 
         app.open_auth_page()
