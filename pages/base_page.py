@@ -14,6 +14,13 @@ class BasePage:
         )
         return element
 
+    def find_clickable_element(self, locator, wait_time=10):
+        element = WebDriverWait(self.app.driver, wait_time).until(
+            EC.element_to_be_clickable(locator),
+            message=f"Element not clickable {locator}",
+        )
+        return element
+
     def find_elements(self, locator):
         return self.app.driver.find_elements(*locator)
 
@@ -30,11 +37,20 @@ class BasePage:
             element.send_keys(text)
             return element
 
+    def fill_file_input(self, file_input, file):
+        file_input.clear()
+        if file:
+            file_input.send_keys(file)
+            return file_input
+
     def click_element(self, element):
         element.click()
 
     def make_screenshot(self):
         return self.app.driver.get_screenshot_as_png()
+
+    def execute_js(self, js_script):
+        self.app.driver.execute_script(js_script)
 
     def get_page_url(self):
         return self.app.driver.current_url
