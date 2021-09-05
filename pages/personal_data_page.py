@@ -3,7 +3,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
-from locators.personal_data_page_locators import PersonalDataPageLocators
+from locators.personal_data_page_locators import PersonalDataPageLocators, PersonalDataPageMoreLocators, \
+    PersonalDataPageTagLocators, PersonalDataPageOptionalLocators
 
 
 class PersonalDataPage(BasePage):
@@ -99,3 +100,162 @@ class PersonalDataPage(BasePage):
             return True
         else:
             return False
+
+
+class PersonalDataPageMore(BasePage):
+
+    def find_open_info(self):
+        return self.find_element(PersonalDataPageMoreLocators.TEXT_BUTTON)
+
+    def open_info(self):
+        self.click_element(self.find_open_info())
+
+    def basic_data_more(self) -> WebElement:
+        return self.find_element(PersonalDataPageMoreLocators.NAME_INPUT)
+
+    def name_phonetic_input(self) -> WebElement:
+        return self.find_element(PersonalDataPageMoreLocators.NAME_PHONETIC)
+
+    def lastname_phonetic_input(self) -> WebElement:
+        return self.find_element(PersonalDataPageMoreLocators.LAST_NAME_PHONETIC)
+
+    def middle_name_input(self) -> WebElement:
+        return self.find_element(PersonalDataPageMoreLocators.MIDDLE_NAME)
+
+    def alternate_name_input(self) -> WebElement:
+        return self.find_element(PersonalDataPageMoreLocators.ALTERNATE_NAME)
+
+    def input_name_phonetic(self, name_phonetic):
+        self.fill_element(self.name_phonetic_input(), name_phonetic)
+
+    def input_lastname_phonetic(self, lastname_phonetic):
+        self.fill_element(self.lastname_phonetic_input(), lastname_phonetic)
+
+    def input_middle_name(self, middle_name):
+        self.fill_element(self.middle_name_input(), middle_name)
+
+    def input_alternate_name(self, alternate_name):
+        self.fill_element(self.alternate_name_input(), alternate_name)
+
+    def submit_button(self) -> WebElement:
+        return self.find_element(PersonalDataPageLocators.SUBMIT_BUTTON)
+
+    def submit_changes(self):
+        self.click_element(self.submit_button())
+
+    def edit_personal_data_more(self, data):
+        self.open_info()
+        self.input_name_phonetic(data.name_phonetic)
+        self.input_lastname_phonetic(data.lastname_phonetic)
+        self.input_middle_name(data.middlename)
+        self.input_alternate_name(data.alternatename)
+        self.submit_changes()
+
+    def is_changed(self):
+        self.find_element(PersonalDataPageMoreLocators.BODY)
+        element = self.find_elements(PersonalDataPageMoreLocators.CHANGE)
+        if len(element) > 0:
+            return True
+        return False
+
+
+class PersonalDataPageOptional(BasePage):
+
+    def find_open_info(self):
+        return self.find_element(PersonalDataPageOptionalLocators.OPTIONAL_BUTTON)
+
+    def open_info(self):
+        self.click_element(self.find_open_info())
+
+    def find_individual_number(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.INDIVIDUAL_NUMBER_INPUT)
+
+    def individual_number_input(self, individualnumber):
+        self.fill_element(self.find_individual_number(), individualnumber)
+
+    def find_institution(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.INSTITUTION_INPUT)
+
+    def institution_input(self, institution):
+        self.fill_element(self.find_institution(), institution)
+
+    def find_department(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.DEPARTMENT_INPUT)
+
+    def department_input(self, department):
+        self.fill_element(self.find_department(), department)
+
+    def find_phone1(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.PHONE1_INPUT)
+
+    def phone1_input(self, phone1):
+        self.fill_element(self.find_phone1(), phone1)
+
+    def find_phone2(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.PHONE2_INPUT)
+
+    def phone2_input(self, phone2):
+        self.fill_element(self.find_phone2(), phone2)
+
+    def find_address(self) -> WebElement:
+        return self.find_element(PersonalDataPageOptionalLocators.ADDRESS_INPUT)
+
+    def address_input(self, address):
+        self.fill_element(self.find_address(), address)
+
+    def submit_button(self) -> WebElement:
+        return self.find_element(PersonalDataPageLocators.SUBMIT_BUTTON)
+
+    def submit_changes(self):
+        self.click_element(self.submit_button())
+
+    def edit_personal_data_optional(self, data):
+        self.open_info()
+        self.individual_number_input(data.individualnumber)
+        self.institution_input(data.institution)
+        self.department_input(data.department)
+        self.phone1_input(data.phone1)
+        self.phone2_input(data.phone2)
+        self.address_input(data.address)
+        self.submit_changes()
+
+    def is_changed(self):
+        self.find_element(PersonalDataPageMoreLocators.BODY)
+        element = self.find_elements(PersonalDataPageMoreLocators.CHANGE)
+        if len(element) > 0:
+            return True
+        return False
+
+
+class PersonalDataPageTag(BasePage):
+
+    def find_open_info(self):
+        return self.find_element(PersonalDataPageTagLocators.TAG_BUTTON)
+
+    def open_info(self):
+        self.click_element(self.find_open_info())
+
+    def find_tag(self) -> WebElement:
+        return self.find_element(PersonalDataPageTagLocators.TAG_INPUT)
+
+    def tag_input(self, tag):
+        self.fill_element(self.find_tag(), tag)
+        self.click_enter(self.find_tag())
+
+    def submit_button(self) -> WebElement:
+        return self.find_element(PersonalDataPageLocators.SUBMIT_BUTTON)
+
+    def submit_changes(self):
+        self.click_element(self.submit_button())
+
+    def edit_personal_data_tag(self, data):
+        self.open_info()
+        self.tag_input(data.tag)
+        self.submit_changes()
+
+    def is_changed(self):
+        self.find_element(PersonalDataPageMoreLocators.BODY)
+        element = self.find_elements(PersonalDataPageMoreLocators.CHANGE)
+        if len(element) > 0:
+            return True
+        return False

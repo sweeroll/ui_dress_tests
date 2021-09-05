@@ -1,3 +1,4 @@
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -38,3 +39,6 @@ class BasePage:
 
     def get_page_url(self):
         return self.app.driver.current_url
+
+    def click_enter(self, element):
+        element.send_keys(Keys.RETURN)

@@ -19,7 +19,7 @@ def app(request):
     logger.info(f"Start moodle {base_url} with headless={headless_mode} mode")
     if headless_mode == "true":
         chrome_options = Options()
-        chrome_options.headless = True
+        chrome_options.headless = False
         fixture = Application(
             webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options),
             base_url,
@@ -64,12 +64,12 @@ def pytest_addoption(parser):
     parser.addoption(
         "--username",
         action="store",
-        default="rishat",
+        default="nadi",
         help="enter username",
     ),
     parser.addoption(
         "--password",
         action="store",
-        default="Rishat-9173",
+        default="Nadi123456!",
         help="enter password",
     ),
