@@ -118,7 +118,7 @@ class TestPersonalData:
         2. Auth with valid data
         3. Check auth result
         4. Go to page with editing personal data
-        5. Edit basic personal data with valid data
+        5. Edit additional personal data with valid data
         6. Check successfully editing
         """
         app.login.go_to_editing_personal_data()
@@ -133,7 +133,7 @@ class TestPersonalData:
         2. Auth with valid data
         3. Check auth result
         4. Go to page with editing personal data
-        5. Edit basic personal data with valid data
+        5. Edit optional personal data with valid data
         6. Check successfully editing
         """
         app.open_main_page()
