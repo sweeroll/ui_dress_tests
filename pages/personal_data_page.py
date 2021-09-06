@@ -104,7 +104,7 @@ class PersonalDataPage(BasePage):
 
 class PersonalDataPageMore(BasePage):
 
-    def find_open_info(self):
+    def find_open_info(self) -> WebElement:
         return self.find_element(PersonalDataPageMoreLocators.MORE_SECTION_BUTTON)
 
     def open_info(self):
@@ -158,7 +158,7 @@ class PersonalDataPageMore(BasePage):
 
 class PersonalDataPageOptional(BasePage):
 
-    def find_open_info(self):
+    def find_open_info(self) -> WebElement:
         return self.find_element(PersonalDataPageOptionalLocators.OPTIONAL_SECTION_BUTTON)
 
     def open_info(self):
@@ -224,9 +224,9 @@ class PersonalDataPageOptional(BasePage):
         return False
 
 
-class PersonalDataPageTag(BasePage):
+class PersonalDataPageTag(BasePage) :
 
-    def find_open_info(self):
+    def find_open_info(self)  -> WebElement:
         return self.find_element(PersonalDataPageTagLocators.TAG_SECTION_BUTTON)
 
     def open_info(self):
