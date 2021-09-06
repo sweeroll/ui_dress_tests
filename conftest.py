@@ -64,12 +64,12 @@ def pytest_addoption(parser):
     parser.addoption(
         "--username",
         action="store",
-        default="rishat",
+        default="nadi",
         help="enter username",
     ),
     parser.addoption(
         "--password",
         action="store",
-        default="Rishat-9173",
+        default="Nadi123456!",
         help="enter password",
     ),
