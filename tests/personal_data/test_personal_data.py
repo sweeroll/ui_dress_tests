@@ -1,8 +1,14 @@
+import os.path
+
 import pytest
 import allure
 from allure_commons.types import AttachmentType
 
 from models.personal_data import PersonalData as PD
+
+
+current_dir = os.path.dirname(__file__)
+user_images_directory = os.path.join(current_dir, "user_images")
 
 
 @pytest.mark.personal_data
@@ -111,7 +117,15 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
-    def test_valid_edit_more_personal_data(self, app, auth):
+    @pytest.mark.set_user_image
+    @pytest.mark.parametrize(
+        "image_file",
+        [
+            os.path.join(user_images_directory, image)
+            for image in os.listdir(user_images_directory)
+        ],
+    )
+    def test_valid_edit_more_personal_data(self, app, auth, image_file):
         """
         Steps
         1. Open auth page
@@ -119,6 +133,7 @@ class TestPersonalData:
         3. Check auth result
         4. Go to page with editing personal data
         5. Edit additional personal data with valid data
+        5. Edit user image
         6. Check successfully editing
         """
         app.login.go_to_editing_personal_data()

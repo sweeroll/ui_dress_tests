@@ -33,6 +33,7 @@ class PersonalData:
         phone2=None,
         address=None,
         tag=None,
+        user_image_description=None,
     ):
         self.name = name
         self.last_name = last_name
@@ -56,6 +57,7 @@ class PersonalData:
         self.phone2 = phone2
         self.address = address
         self.tag = tag
+        self.user_image_description = user_image_description
 
     @staticmethod
     def random():
@@ -83,6 +85,7 @@ class PersonalData:
         phone2 = fake.phone_number()
         address = fake.address()
         tag = fake.word()
+        user_image_description = fake.text(max_nb_chars=20)
         return PersonalData(
             name,
             last_name,
@@ -106,4 +109,5 @@ class PersonalData:
             phone2,
             address,
             tag,
+            user_image_description,
         )

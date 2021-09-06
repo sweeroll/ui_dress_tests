@@ -41,3 +41,9 @@ class PersonalDataPageOptionalLocators:
 class PersonalDataPageTagLocators:
     TAG_SECTION_BUTTON = (By.XPATH, "//*[text()='Интересы']")
     TAG_INPUT = (By.CSS_SELECTOR, "input[placeholder='Введите теги...']")
+    USER_IMAGE_DESCRIPTION = (By.ID, "id_imagealt")
+    USER_IMAGE_FILE_ADD_BUTTON = (By.CLASS_NAME, "fp-btn-add")
+    USER_IMAGE_FILE_CHOOSE_INPUT = (By.CSS_SELECTOR, "input[type='file']")
+    DOWNLOAD_FILE_BUTTON = (By.CLASS_NAME, "fp-upload-btn")
+    USER_PROFILE_DEFAULT_PICTURE = (By.CLASS_NAME, "defaultuserpic")
+    
